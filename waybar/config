@@ -1,0 +1,202 @@
+{
+	// -------------------------------------------------------------------------
+	// Global configuration
+	// -------------------------------------------------------------------------
+
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+		"sway/mode",
+		"sway/workspaces",
+		"custom/arrow10",
+		"sway/window"
+	],
+
+	"modules-right": [
+		"custom/arrow1",
+		"pulseaudio",
+		"custom/arrow2",
+		"network",
+		"custom/arrow3",
+		"memory",
+		"custom/arrow4",
+		"cpu",
+		"custom/arrow5",
+		"temperature",
+		"custom/arrow6",
+		"sway/language",
+		"custom/arrow7",
+		"battery",
+		"custom/arrow8",
+		"tray",
+		"clock#date",
+		"custom/arrow9",
+		"clock#time"
+	],
+
+	// -------------------------------------------------------------------------
+	// Modules
+	// -------------------------------------------------------------------------
+
+	"battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+	"clock#time": {
+		"interval": 10,
+		"format": "{:%H:%M}",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 20,
+		"format": "{:%e %b %Y}", // Icon: calendar-alt
+		//"tooltip-format": "{:%e %B %Y}"
+		"tooltip": false
+	},
+
+	"cpu": {
+		"tooltip": false,
+		"format": "  {usage}%", // Icon: microchip
+		"states": {
+		  "warning": 70,
+		  "critical": 90
+		}
+	},
+
+	"sway/language": {
+		"format": "  {}",
+		"min-length": 5,
+		"tooltip": false
+	},
+
+	"memory": {
+		"interval": 5,
+		"format": "  {}%", // Icon: memory
+		"states": {
+			"warning": 70,
+			"critical": 90
+		}
+	},
+
+	"network": {
+		"format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
+		"format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+		"format-disconnected": "睊",
+		"tooltip-format": "{ifname}: {ipaddr}",
+	},
+
+	"sway/mode": {
+		"format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
+		"tooltip": false
+	},
+
+	"sway/window": {
+		"format": "{}",
+		"max-length": 30,
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"all-outputs": false,
+		"disable-scroll": false,
+		"format": "{name}",
+		"format-icons": {
+			"1:www": "龜", // Icon: firefox-browser
+			"2:mail": "", // Icon: mail
+			"3:editor": "", // Icon: code
+			"4:terminals": "", // Icon: terminal
+			"5:portal": "", // Icon: terminal
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		}
+	},
+
+	"pulseaudio": {
+        "format": "{icon} {format_source}  {volume}%",
+        "format-muted": "ﱝ {format_source}",
+        "format-source": "  {volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "phone": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+	"temperature": {
+		"critical-threshold": 90,
+		"format": "{icon} {temperatureC}°",
+		"format-icons": [
+			"", // Icon: temperature-empty
+			"", // Icon: temperature-quarter
+			"", // Icon: temperature-half
+			"", // Icon: temperature-three-quarters
+			""  // Icon: temperature-full
+		],
+	},
+
+	"tray": {
+		"icon-size": 21
+		//"spacing": 10
+	},
+
+	"custom/arrow1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow4": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow5": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow6": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow7": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow8": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow9": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow10": {
+		"format": "",
+		"tooltip": false
+	}
+}

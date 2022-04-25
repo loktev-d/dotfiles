@@ -1,0 +1,14 @@
+*
+!*/
+!.gitignore
+!alcritty/**
+!*/config.fish
+!*/fish_plugins
+!gtk-3.0/**
+!nvim/**
+!omf/**
+ranger/plugins/
+!*/rc.conf
+!sway/**
+!swaylock/**
+!waybar/**
