@@ -1,3 +1,9 @@
+local on_attach = function(client, bufnr)
+    require('buf_keymaps')(client, bufnr)
+
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>jr", "<cmd>lua require('jdtls').update_project_config()<CR>", {})
+end
+
 local config = {
     cmd = {
         'java',
@@ -16,7 +22,7 @@ local config = {
         '-configuration', vim.fn.expand('~/.local/share/jdtls/config_linux'),
         '-data', vim.fn.expand('~/.cache/jdtls'),
     },
-    on_attach = require('buf_keymaps'),
+    on_attach = on_attach,
     root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', 'pom.xml' }),
 }
 
