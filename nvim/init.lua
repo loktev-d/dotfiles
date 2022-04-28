@@ -7,6 +7,7 @@ vim.opt.background = "dark"
 vim.opt.scrolloff = 7
 vim.opt.cursorline = true
 vim.opt.showmode = false
+vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 
 local signature_config = {
     handler_opts = {
