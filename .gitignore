@@ -1,0 +1,13 @@
+*
+!*/
+!.gitignore
+!alcritty/**
+!*/config.fish
+!*/fish_plugins
+!gtk-3.0/settings.ini
+!gtk-4.0/settings.ini
+!fontconfig/**
+!nvim/**
+ranger/plugins/
+!*/rc.conf
+!.tmux.conf
