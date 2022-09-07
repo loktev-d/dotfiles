@@ -28,9 +28,12 @@ require 'treesitter-context'.setup()
 require 'gitsigns'.setup()
 require 'fidget'.setup {}
 
+local on_attach = require 'on_attach'
+
 -- LSP
 require 'lspconfig'.sumneko_lua.setup(require 'lua_setup')
-require 'lspconfig'.gopls.setup { on_attach = require 'on_attach' }
+require 'lspconfig'.gopls.setup { on_attach = on_attach }
+require 'lspconfig'.yamlls.setup { on_attach = on_attach }
 
 local map = vim.keymap.set
 
