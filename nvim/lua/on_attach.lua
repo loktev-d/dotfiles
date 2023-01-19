@@ -1,7 +1,7 @@
 return function(client, bufnr)
     require("nvim-navic").attach(client, bufnr)
 
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
         local format = vim.api.nvim_create_augroup('format', { clear = true })
 
         vim.api.nvim_create_autocmd('BufWritePre', {

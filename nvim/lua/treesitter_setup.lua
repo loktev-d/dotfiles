@@ -1,5 +1,5 @@
 return {
-    ensure_installed = { "lua", "go", "yaml", "json" },
+    ensure_installed = { "lua", "go", "yaml", "json", "javascript", "typescript", "svelte", "css", "html" },
     sync_install = true,
     auto_install = true,
     highlight = {
