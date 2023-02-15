@@ -11,57 +11,105 @@ vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.o.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- AUTOCMD
+local indent = vim.api.nvim_create_augroup('indent', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'html,css,js,typescript,svelte,mjs,astro,json',
+    group = indent,
+    command = 'setlocal ts=2 sw=2'
+})
 
 -- PLUGINS
 require 'packer_plugins'
 
-vim.cmd('colorscheme onedark')
-
 -- PLUGIN SETUPS
+require 'catppuccin'.setup {
+    -- navic = {
+    --     enabled = true,
+    --     custom_bg = "NONE",
+    -- },
+}
+
+vim.cmd.colorscheme "catppuccin"
+
 require 'nvim-treesitter.configs'.setup(require 'treesitter_setup')
 require 'treesitter_setup'
-require 'lualine'.setup(require 'lualine_setup')
-require 'lspsaga'.init_lsp_saga {}
+require 'lspsaga'.setup {}
 require 'lsp_signature'.setup()
-require 'coq_setup'
 require 'nvim-cursorline'.setup(require 'cursorline_setup')
 require 'indent_blankline'.setup(require 'indent_blankline_setup')
 require 'Comment'.setup()
 require 'hop'.setup()
-require 'autopairs_setup'
+require 'nvim-autopairs'.setup {}
 require 'treesitter-context'.setup()
 require 'gitsigns'.setup()
-require 'fidget'.setup {}
-require 'chadtree_setup'
+require 'colorizer'.setup()
+
+require 'nvim-tree'.setup {
+    renderer = {
+        icons = {
+            padding = "  "
+        }
+    }
+}
+local ctp_feline = require "catppuccin.groups.integrations.feline"
+
+ctp_feline.setup {
+    assets = {
+        git = {
+            branch = "",
+        }
+    }
+}
+
+require('feline').setup {
+    components = ctp_feline.get(),
+    disable = {
+        filetypes = {
+            '^NvimTree$',
+            '^packer$',
+            '^fugitive$',
+            '^fugitiveblame$',
+            '^help$'
+        },
+    }
+}
+
+require 'cmp_setup'
 
 local on_attach = require 'on_attach'
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- LSP
-require 'lspconfig'.sumneko_lua.setup(require 'lua_setup')
-require 'lspconfig'.gopls.setup { on_attach = on_attach }
-require 'lspconfig'.yamlls.setup { on_attach = on_attach }
-require 'lspconfig'.ansiblels.setup { on_attach = on_attach }
-require 'lspconfig'.svelte.setup {}
-require 'lspconfig'.eslint.setup {}
+require 'lspconfig'.lua_ls.setup(require 'lua_setup')
+require 'lspconfig'.gopls.setup { on_attach = on_attach, capabilities = capabilities }
+require 'lspconfig'.yamlls.setup { on_attach = on_attach, capabilities = capabilities }
+require 'lspconfig'.ansiblels.setup { on_attach = on_attach, capabilities = capabilities }
+require 'lspconfig'.svelte.setup { capabilities = capabilities }
+require 'lspconfig'.eslint.setup { capabilities = capabilities }
 require 'lspconfig'.jsonls.setup { capabilities = capabilities }
 require 'lspconfig'.html.setup { capabilities = capabilities }
 require 'lspconfig'.cssls.setup { capabilities = capabilities }
+require 'lspconfig'.tsserver.setup { on_attach = on_attach, capabilities = capabilities }
+require 'lspconfig'.emmet_ls.setup(require 'emmet_setup')
+require 'lspconfig'.astro.setup { capabilities = capabilities }
 
 -- NULL-LS
 local null_ls = require("null-ls")
 
-null_ls.setup({
+null_ls.setup {
     sources = {
         null_ls.builtins.formatting.prettier.with {
-            extra_filetypes = { "svelte" },
+            extra_filetypes = { "svelte", "astro" },
             on_attach = on_attach
         }
     },
-    on_attach = on_attach
-})
+}
 
 local map = vim.keymap.set
 
@@ -108,4 +156,4 @@ map('n', 'T',
 map('n', '<space>k', "<cmd>lua require'hop'.hint_words()<cr>")
 
 -- CHADTREE
-map('n', '<space>v', '<cmd>:CHADopen<cr>')
+map('n', '<space>v', '<cmd>:NvimTreeToggle<cr>')

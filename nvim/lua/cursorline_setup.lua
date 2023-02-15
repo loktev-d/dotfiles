@@ -3,6 +3,7 @@ return {
         timeout = 0,
     },
     cursorword = {
-        enable = false,
-    }
+        enable = true,
+        -- hl = { underline = false },
+    },
 }
