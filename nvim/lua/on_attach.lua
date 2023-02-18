@@ -1,7 +1,4 @@
-return function(client, bufnr)
-    -- local navic = require("nvim-navic")
-    -- navic.attach(client, bufnr)
-
+return function(client)
     if client.server_capabilities.documentFormattingProvider then
         local format = vim.api.nvim_create_augroup('format', { clear = true })
 

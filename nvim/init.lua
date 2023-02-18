@@ -16,7 +16,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- AUTOCMD
 local indent = vim.api.nvim_create_augroup('indent', { clear = true })
-
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'html,css,js,typescript,svelte,mjs,astro,json',
     group = indent,
@@ -26,63 +25,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- PLUGINS
 require 'packer_plugins'
 
--- PLUGIN SETUPS
-require 'catppuccin'.setup {
-    -- navic = {
-    --     enabled = true,
-    --     custom_bg = "NONE",
-    -- },
-}
-
-vim.cmd.colorscheme "catppuccin"
-
-require 'nvim-treesitter.configs'.setup(require 'treesitter_setup')
-require 'treesitter_setup'
-require 'lspsaga'.setup {}
-require 'lsp_signature'.setup()
-require 'nvim-cursorline'.setup(require 'cursorline_setup')
-require 'indent_blankline'.setup(require 'indent_blankline_setup')
-require 'Comment'.setup()
-require 'hop'.setup()
-require 'nvim-autopairs'.setup {}
-require 'treesitter-context'.setup()
-require 'gitsigns'.setup()
-require 'colorizer'.setup()
-
-require 'nvim-tree'.setup {
-    renderer = {
-        icons = {
-            padding = "  "
-        }
-    }
-}
-local ctp_feline = require "catppuccin.groups.integrations.feline"
-
-ctp_feline.setup {
-    assets = {
-        git = {
-            branch = "",
-        }
-    }
-}
-
-require('feline').setup {
-    components = ctp_feline.get(),
-    disable = {
-        filetypes = {
-            '^NvimTree$',
-            '^packer$',
-            '^fugitive$',
-            '^fugitiveblame$',
-            '^help$'
-        },
-    }
-}
-
-require 'cmp_setup'
-
 local on_attach = require 'on_attach'
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- LSP
@@ -98,18 +41,6 @@ require 'lspconfig'.cssls.setup { capabilities = capabilities }
 require 'lspconfig'.tsserver.setup { on_attach = on_attach, capabilities = capabilities }
 require 'lspconfig'.emmet_ls.setup(require 'emmet_setup')
 require 'lspconfig'.astro.setup { capabilities = capabilities }
-
--- NULL-LS
-local null_ls = require("null-ls")
-
-null_ls.setup {
-    sources = {
-        null_ls.builtins.formatting.prettier.with {
-            extra_filetypes = { "svelte", "astro" },
-            on_attach = on_attach
-        }
-    },
-}
 
 local map = vim.keymap.set
 
@@ -155,5 +86,8 @@ map('n', 'T',
     "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>")
 map('n', '<space>k', "<cmd>lua require'hop'.hint_words()<cr>")
 
--- CHADTREE
+-- TREE
 map('n', '<space>v', '<cmd>:NvimTreeToggle<cr>')
+
+-- NEOGIT
+map('n', '<space>i', '<cmd>:Neogit<cr>')
